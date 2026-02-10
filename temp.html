@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Travel Home</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#87ceeb,#ffffff);
+    text-align:center;
+}
+
+.container{
+    margin-top:40px;
+}
+
+input{
+    padding:10px;
+    width:220px;
+    margin:10px;
+    font-size:16px;
+}
+
+button{
+    padding:10px 25px;
+    font-size:16px;
+    background:#2196f3;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.railway{
+    position:relative;
+    width:100%;
+    height:220px;
+    overflow:hidden;
+    margin-top:50px;
+}
+
+.track{
+    position:absolute;
+    bottom:60px;
+    width:100%;
+    height:6px;
+    background:#333;
+}
+
+.train{
+    position:absolute;
+    bottom:80px;
+    font-size:80px;
+    left:-150px;
+}
+
+/* Animation class added by JS */
+.move{
+    animation: moveTrain 6s linear forwards;
+}
+
+@keyframes moveTrain{
+    from{ left:-150px; }
+    to{ left:90%; }
+}
+
+.city-labels{
+    display:flex;
+    justify-content:space-between;
+    margin:0 50px;
+    font-weight:bold;
+    font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🚄 Smart Travel Recommendation System</h1>
+
+<div class="container">
+    <input id="home" type="text" placeholder="Enter Home City">
+    <input id="dest" type="text" placeholder="Enter Destination City">
+    <br>
+    <button onclick="startJourney()">Start Journey</button>
+</div>
+
+<div class="railway">
+
+    <div class="city-labels">
+        <span id="homeLabel">🏠 Home</span>
+        <span id="destLabel">📍 Destination</span>
+    </div>
+
+    <div class="track"></div>
+
+    <div id="train" class="train">🚆</div>
+
+</div>
+
+<script>
+function startJourney(){
+
+    let home = document.getElementById("home").value;
+    let dest = document.getElementById("dest").value;
+
+    if(home === "" || dest === ""){
+        alert("Please enter both cities!");
+        return;
+    }
+
+    document.getElementById("homeLabel").innerText = "🏠 " + home;
+    document.getElementById("destLabel").innerText = "📍 " + dest;
+
+    let train = document.getElementById("train");
+
+    train.classList.remove("move"); // reset animation
+    void train.offsetWidth;         // trick to restart animation
+    train.classList.add("move");
+}
+</script>
+
+</body>
+</html>
